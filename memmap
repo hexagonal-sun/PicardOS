@@ -1,0 +1,10 @@
+MEMORY
+{
+    ram(WAILRX)   : ORIGIN = 0x00000000, LENGTH = 0x800000
+}
+SECTIONS
+{
+    .text : { *(.text*) } > ram
+    .note.gnu.build-id : { *(.note.gnu.build-id*) }
+}
+
