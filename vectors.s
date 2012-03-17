@@ -26,5 +26,4 @@ setup:
 	ldr sp,=0x00027C00
 	MSR CPSR_c, #CPSR_USER
 	bl main
-	MSR CPSR_c, #CPSR_SUP
 	svc 0
