@@ -19,8 +19,8 @@ __syscall:		PUSH {R12, LR}
 			ADD  R12, PC, R12, LSL #2  /* Calc table offset. */
 			LDR  PC, [R12, #0] /* Load into the PC. */
 
-jump_table:	.word _write_pio_a
+jump_table:		.word _write_pio_a
 
-svc_return:	POP  {R12, LR}
-	        MOVS PC, LR
+svc_return:		POP  {R12, LR}
+			MOVS PC, LR
 	

@@ -3,8 +3,10 @@ AS=as
 CFLAGS=-static -nostdlib -O0 --std=c99 -march=armv4 -mno-thumb-interwork
 LDFLAGS=-T memmap -
 
-%.elf: %.o vectors.o exit.o svc.o syscallentry.o syscalls/write_pio_a.o
-	$(CC) -T memmap -static -nostdlib vectors.o svc.o syscallentry.o syscalls/write_pio_a.o exit.o $< -o $@
+objects=vectors.o exit.o syscalls/syscallentry.o syscalls/write_pio_a.o
+
+%.elf: %.o $(objects)
+	$(CC) -T memmap -static -nostdlib $(objects) $< -o $@
 
 %.bin: %.elf
 	objcopy -O binary $< $@

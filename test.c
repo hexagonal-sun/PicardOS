@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include "syscalls/syscalls.h"
 
 void delay()
 {
@@ -12,11 +13,10 @@ int main()
 {
 	for(int i = 0; i < 5; i++)
 {
-  int* port = (int*)0x10000000;
   int* timer = (int*)0x10000008;
-	*port = (*timer);
+write_pio_a(*timer);
 	delay();
-	*port = (*timer);
+	write_pio_a(*timer);
 	delay();
 }	
 }
