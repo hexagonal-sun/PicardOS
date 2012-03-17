@@ -20,6 +20,7 @@ __syscall:		PUSH {R12, LR}
 			LDR  PC, [R12, #0] /* Load into the PC. */
 
 jump_table:		.word _write_pio_a
+			.word _get_timer_val
 
 svc_return:		POP  {R12, LR}
 			MOVS PC, LR
