@@ -1,3 +1,4 @@
+
 void _write_pio_a()
 {
   int val;
@@ -11,5 +12,5 @@ void _write_pio_a()
 void write_pio_a(unsigned int val)
 {
   __asm__ volatile("mov r0, %[value]\n"
-		   "svc 0" :: [value] "r" (val) : "cc", "lr");
+		   "svc 2" :: [value] "r" (val) : "cc", "lr");
 }
