@@ -1,4 +1,5 @@
 #include "../misc/addresses.h"
+#include "../misc/pcb.h"
 
 void _irq_timer_handle()
 {
@@ -7,4 +8,7 @@ void _irq_timer_handle()
 
   // Calculate the new interupt time.
   (*TIMER_CMP_REG) = ((*TIMER_CMP_REG + 20) % 256);
+
+  // Context switch on timers.
+  SHOULD_CTX_SWITCH = 1;
 }

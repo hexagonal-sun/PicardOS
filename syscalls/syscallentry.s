@@ -22,6 +22,7 @@ __syscall:		PUSH {R12, LR}
 jump_table:		.word _halt
 			.word _get_timer_val
 			.word _write_pio_a
+			.word _fork
 
 svc_return:		POP  {R12, LR}
 			MOVS PC, LR

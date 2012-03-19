@@ -22,6 +22,13 @@ _start:
 	b _exit
 
 setup:
+	/* Initialise memory */
+	MOV R0, #0
+	LDR R1, =PCB_HEAD
+	STR R0, [R1]
+	LDR R1, =SHOULD_CTX_SWITCH
+	STR R0, [R1]
+
 	/* set the supervisor stack */
 	LDR sp,=0x00037C00
 	BL  _timer_setup
@@ -37,15 +44,19 @@ setup:
 	LDR R1, =IRQ_ENABLE
 	STR R0, [R1]
 
-	/* Switch to System mode. */
-	MSR CPSR_c, #CPSR_SYS
-	ldr sp,=0x00027C00
+	/* Switch back to sup mode for program
+	   initalisation */
+	MSR CPSR_c, #CPSR_SUP
 
-	/* Switch to User mode */
-	MSR CPSR_c, #CPSR_USER
+	/* Fork to the user program */
+	LDR R0, =proc1
+	MOV R1, #1000
+	BL  _fork
+	LDR R0, =proc2
+	MOV R1, #1000
+	BL  _fork
+	LDR R0, =main
+	MOV R1, #100
+	BL _fork
 
-	/* Execute the user programs */
-	bl main
-
-	/* System halt. */
-	svc 0
+	B  _task_switch
