@@ -4,7 +4,8 @@ CFLAGS=-static -nostdlib -O0 --std=c99 -march=armv4 -mno-thumb-interwork -fno-bu
 
 objects=vectors.o exit.o syscalls/syscallentry.o syscalls/write_pio_a.o \
 syscalls/get_timer_val.o syscalls/halt.o irq/irq_entry.o irq/timer_interupt.o \
-setup/timer_setup.o misc/addresses.o syscalls/fork.o sched.o sched_policy.o
+setup/timer_setup.o misc/addresses.o syscalls/fork.o scheduling/task_switch.o \
+scheduling/sched_policy.o
 
 %.elf: %.o $(objects)
 	$(CC) -T memmap -static -fno-builtin -nostdlib $(objects) $< -o $@

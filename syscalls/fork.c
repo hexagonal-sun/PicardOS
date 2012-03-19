@@ -1,5 +1,5 @@
 #include "../misc/addresses.h"
-#include "../misc/pcb.h"
+#include "../scheduling/pcb.h"
 
 void _fork()
 {

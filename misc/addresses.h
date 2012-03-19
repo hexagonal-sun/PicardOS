@@ -1,4 +1,4 @@
-#include "pcb.h"
+#include "../scheduling/pcb.h"
 
 // Declare some usefull addresses.
 unsigned int* const TIMER_ADDRESS;
