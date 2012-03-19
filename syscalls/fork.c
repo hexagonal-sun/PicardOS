@@ -1,6 +1,8 @@
 #include "../misc/addresses.h"
 #include "../scheduling/pcb.h"
 
+void exit();
+
 void _fork()
 {
   unsigned int start_address;
@@ -18,13 +20,15 @@ void _fork()
   // set the PC.
   new_pcb->regs[16] = start_address;
 
+  // set the CPSR
+  new_pcb->regs[15] = 0x10;
+
+  // Set the LR to the exit function.
+  new_pcb->regs[14] = (unsigned int)&exit;
+
   // set the stack.
   new_pcb->regs[13] = NEXT_FREE_STACK;
   NEXT_FREE_STACK -= stack_size;
-
-
-  // set the CPSR
-  new_pcb->regs[15] = 0x10;
 
   if(PCB_HEAD == 0)
     {

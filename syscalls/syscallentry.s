@@ -1,6 +1,6 @@
 .global			__syscall
 .set svc_opcode_clear,	0xFF000000
-.set max_swi,		0x04
+.set max_swi,		0x05
 
 __syscall:		PUSH {R12, LR}
 
@@ -12,8 +12,14 @@ __syscall:		PUSH {R12, LR}
 			CMP  R12, #max_swi
 			BHI  svc_return
 
-			/* Load the return address. */
-			ADR  LR, svc_return
+			/* Load the return address */
+			ADR LR, svc_return
+
+			/* Check if this is an exit routine. */
+			CMP R12, #4
+
+			/* Load the return if we are an exit call. */
+			ADREQ LR, svc_exit_return
 
 			/* Do the jump */
 			ADD  R12, PC, R12, LSL #2  /* Calc table offset. */
@@ -23,7 +29,10 @@ jump_table:		.word _halt
 			.word _get_timer_val
 			.word _write_pio_a
 			.word _fork
+			.word _exit
 
 svc_return:		POP  {R12, LR}
 			MOVS PC, LR
-	
+
+svc_exit_return:	POP {R12, LR}
+			B _task_switch
