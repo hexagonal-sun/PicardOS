@@ -1,5 +1,6 @@
 #include "../misc/addresses.h"
 #include "../scheduling/pcb.h"
+#include "../scheduling/util.h"
 
 void exit();
 
@@ -30,16 +31,8 @@ void _fork()
   new_pcb->regs[13] = NEXT_FREE_STACK;
   NEXT_FREE_STACK -= stack_size;
 
-  if(PCB_HEAD == 0)
-    {
-      PCB_HEAD = new_pcb;
-      new_pcb->next = new_pcb;
-    }
-  else
-    {
-      new_pcb->next = PCB_HEAD->next;
-      PCB_HEAD->next = new_pcb;
-    }
+  // Add the new task to the run-queue.
+  add_to_queue(new_pcb, &PCB_HEAD);
 }
 
 

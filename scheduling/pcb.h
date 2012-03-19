@@ -6,6 +6,7 @@ struct pcb
 {
   unsigned int regs[17];
   struct pcb* next;
+  struct pcb* prev;
 };
 
 #endif
