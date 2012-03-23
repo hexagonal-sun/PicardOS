@@ -12,10 +12,12 @@ __irq_entry:
 	PUSH {R0-R4, LR}
 
 	MOV  R3, #port_area /*set the I/O port address.*/
-	LDR  R0, [R3, #irq_ack] /*find which interrupt was called*/
-	TST  R0, #irq_timer     /*Timer interrupt.*/
-	BLNE _irq_timer_handle
-	STR  R0, [R3, #irq_ack] /*Acknowledge the interrupt.*/
+	LDR  R4, [R3, #irq_ack] /*find which interrupt was called*/
+	TST  R4, #irq_timer     /*Timer interrupt.*/
+	BICNE R4, R4, #irq_timer
+	BLNE  _irq_timer_handle
+	MOV  R3, #port_area
+	STR  R4, [R3, #irq_ack] /*Acknowledge the interrupt.*/
 
 	LDRB R0, =SHOULD_CTX_SWITCH /* Load the context switch flag */
 	CMP  R0, #0 /* See if we should switch the context. */
