@@ -30,8 +30,9 @@ jump_table:		.word _halt
 			.word _write_pio_a
 			.word _fork
 			.word _exit
-			.word _lcd_ctl
+			.word _lcd_backlight_control
 			.word _print_string
+			.word _lcd_send_command
 
 svc_return:		POP  {R12, LR}
 			MOVS PC, LR

@@ -4,14 +4,15 @@
 #define LCD_E  0x1
 #define LCD_RW 0x4
 #define LCD_BUSY_MASK 0x80
+#define LCD_BACKLIGHT_MASK 0x20
 
 /* LCD commands */
 #define LCD_NEWLINE 0xC0
 
 enum reg_type
 {
-	REG_DATA,
-	REG_CONTROL
+	REG_DATA = 0,
+	REG_CONTROL = 1
 };
 
 

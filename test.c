@@ -51,9 +51,9 @@ void lcd_test()
 {
   while(1)
     {
-      lcd_ctl(BACKLIGHT_ON);
+      lcd_send_command(BACKLIGHT_ON);
       delay();
-      lcd_ctl(BACKLIGHT_OFF);
+      lcd_send_command(BACKLIGHT_OFF);
       delay();
     }
 }
@@ -61,7 +61,7 @@ void lcd_test()
 void lcd_print_test()
 {
   char* c = "Hello, World!\nAlso, Hi!";
-  lcd_ctl(BACKLIGHT_ON);
+  lcd_send_command(BACKLIGHT_ON);
   print_string(c);
   volatile int i = 0;
   while(1)
