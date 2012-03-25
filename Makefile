@@ -1,6 +1,8 @@
-CC=gcc
-AS=as
-CFLAGS=-static -nostdlib -O0 --std=c99 -march=armv4 -mno-thumb-interwork -fno-builtin -g3
+CC=arm-elf-gcc
+AS=arm-elf-as
+CFLAGS=-static -nostdlib -Ofast --std=c99 -march=armv4 -mno-thumb-interwork -fno-builtin -g3 -mhard-float
+
+all:test.elf
 
 objects=vectors.o syscalls/syscallentry.o syscalls/write_pio_a.o \
 syscalls/get_timer_val.o syscalls/halt.o irq/irq_entry.o irq/timer_interupt.o \
@@ -16,4 +18,7 @@ scheduling/sched_policy.o syscalls/exit.o scheduling/util.o
 %.kmd: %.bin convert.py
 	python2 convert.py $< > $@
 
+clean:
+	rm -rf test.elf
 
+.PHONY: all clean
