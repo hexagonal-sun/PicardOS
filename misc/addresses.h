@@ -10,3 +10,7 @@ struct pcb* PCB_HEAD;
 unsigned char SHOULD_CTX_SWITCH;
 unsigned int* PCB_BASE;
 unsigned int NEXT_FREE_STACK;
+
+// IO addresses.
+volatile unsigned int* PIO_A;
+volatile unsigned int* PIO_B;

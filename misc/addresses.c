@@ -7,3 +7,6 @@ struct pcb* PCB_HEAD = 0;
 unsigned char SHOULD_CTX_SWITCH = 0;
 unsigned int* PCB_BASE = (unsigned int*)0x0007FFF0;
 unsigned int* NEXT_FREE_STACK = (unsigned int*)0x00027C00;
+
+volatile unsigned int* PIO_A = (unsigned int*)0x10000000;
+volatile unsigned int* PIO_B = (unsigned int*)0x10000004;

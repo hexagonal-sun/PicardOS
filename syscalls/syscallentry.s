@@ -1,6 +1,6 @@
 .global			__syscall
 .set svc_opcode_clear,	0xFF000000
-.set max_swi,		0x05
+.set max_swi,		0x07
 
 __syscall:		PUSH {R12, LR}
 
@@ -30,6 +30,8 @@ jump_table:		.word _halt
 			.word _write_pio_a
 			.word _fork
 			.word _exit
+			.word _lcd_ctl
+			.word _print_string
 
 svc_return:		POP  {R12, LR}
 			MOVS PC, LR
