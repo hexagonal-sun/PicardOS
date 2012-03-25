@@ -4,16 +4,9 @@
 
 void exit();
 
-void _fork()
+void _fork(unsigned int start_address,
+           unsigned int stack_size)
 {
-  unsigned int start_address;
-  unsigned int stack_size;
-  // get the value from r0.
-  __asm__ volatile("mov %[sa], r0\n"
-		   "mov %[ss], r1"
-		   : [sa] "=r" (start_address),
-		     [ss] "=r" (stack_size));
-
   PCB_BASE -= sizeof(struct pcb);
 
   struct pcb* new_pcb = (struct pcb*)PCB_BASE;
@@ -37,11 +30,7 @@ void _fork()
 
 
 void fork(unsigned int start_address,
-	  unsigned int stack_size)
+          unsigned int stack_size)
 {
-  __asm__ volatile("mov r0, %[sa]\n"
-		   "mov r1, %[ss]\n"
-		   "svc 3"
-		   :: [sa] "r" (start_address),
-		   [ss] "r" (stack_size) : "r0", "r1");
+	__asm__ volatile("svc 3");
 }
