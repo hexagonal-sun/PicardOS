@@ -5,7 +5,7 @@ CFLAGS=-static -nostdlib -Os -mno-thumb-interwork --std=c99 -march=armv4  -fno-b
 
 all: kernel.elf
 
-objects=setup/init.o syscalls/syscallentry.o syscalls/write_pio_a.o \
+objects=setup/init.o setup/main.o syscalls/syscallentry.o syscalls/write_pio_a.o \
 syscalls/get_timer_val.o syscalls/halt.o irq/irq_entry.o irq/timer_interupt.o \
 syscalls/fork.o scheduling/task_switch.o \
 scheduling/sched_policy.o syscalls/exit.o scheduling/util.o \

@@ -7,6 +7,9 @@ SECTIONS
     .text : { *(.text*) }
     .data : { *(.data) }
     .bss : { *(.bss) }
+    _initcall_begin = .;
+    .initcall : { *(.initcall) }
+    _initcall_end = .;
     _up_begin = .;
     .user_processes : { *(.user_processes) }
     _up_end = .;
