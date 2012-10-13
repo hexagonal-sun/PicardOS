@@ -4,9 +4,12 @@ MEMORY
 }
 SECTIONS
 {
-    .text : { *(.text*) } > ram
-    .data : { *(.data) } > ram
+    .text : { *(.text*) }
+    .data : { *(.data) }
     .bss : { *(.bss) }
+    _up_begin = .;
+    .user_processes : { *(.user_processes) }
+    _up_end = .;
     _edata = .;
     .note.gnu.build-id : { *(.note.gnu.build-id*) }
 }

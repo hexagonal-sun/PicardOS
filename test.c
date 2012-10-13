@@ -1,4 +1,5 @@
 #include "syscalls/syscalls.h"
+#include <up.h>
 
 void delay()
 {
@@ -8,13 +9,14 @@ void delay()
     }
 }
 
-void proc1()
+int proc1()
 {
   while(1)
     {
       write_pio_a(24);
     }
 }
+user_process(proc1,1000);
 
 void proc2()
 {
@@ -31,21 +33,6 @@ int factorial(int num)
 		return 1;
 	return (num * factorial(num - 1));
 }
-
-int main()
-{
-	int temp = 0;
-  for(int i = 0; i < 5; i++)
-    {
-      temp += factorial(get_timer_val() % 8);
-    }
-  for(int i =0; i < 10000; i++)
-    {
-      write_pio_a(temp);
-    }
-
-}
-
 
 void lcd_test()
 {
