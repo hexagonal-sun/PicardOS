@@ -11,11 +11,12 @@
 void _lcd_send_command(enum reg_type type,
                        unsigned char data)
 {
+	ioreg new_pio_b = readw(PIO_B);
+
 	// Ensure the LCD isn't busy.
 	_lcd_busy();
 
 	// get the pio.
-	unsigned int new_pio_b = (*PIO_B);
 
 	if(type == REG_DATA)
 		new_pio_b |= LCD_RS;
@@ -27,18 +28,18 @@ void _lcd_send_command(enum reg_type type,
 	new_pio_b &= ~(LCD_RW | LCD_E | LED_ENABLE);
 
 	// write the new PIO_B.
-	(*PIO_B) = new_pio_b;
+	writew(new_pio_b, PIO_B);
 
 	// write the data to PIO A.
-	(*PIO_A) = data;
+	writew(data, PIO_A);
 
 	// Enable the LCD.
 	new_pio_b |= LCD_E;
-	(*PIO_B) = new_pio_b;
+	writew(new_pio_b, PIO_B);
 
 	// disable the LCD.
 	new_pio_b &= ~LCD_E;
-	(*PIO_B) = new_pio_b;
+	writew(new_pio_b, PIO_B);
 }
 
 
@@ -50,10 +51,10 @@ void _lcd_send_command(enum reg_type type,
  */
 void _lcd_backlight_control(unsigned char state)
 {
-	unsigned int new_pio_b = (*PIO_B);
+	ioreg new_pio_b = readw(PIO_B);
 	if(state)
 		new_pio_b |= LCD_BACKLIGHT_MASK;
 	else
 		new_pio_b &= ~LCD_BACKLIGHT_MASK;
-	(*PIO_B) = new_pio_b;
+	writew(new_pio_b, PIO_B);
 }
