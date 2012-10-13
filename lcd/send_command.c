@@ -1,5 +1,4 @@
 #include "lcd.h"
-#include "../misc/addresses.h"
 
 /*
  * Various LCD commands.

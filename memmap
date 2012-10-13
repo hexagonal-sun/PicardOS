@@ -5,6 +5,9 @@ MEMORY
 SECTIONS
 {
     .text : { *(.text*) } > ram
+    .data : { *(.data) } > ram
+    .bss : { *(.bss) }
+    _edata = .;
     .note.gnu.build-id : { *(.note.gnu.build-id*) }
 }
 

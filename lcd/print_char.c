@@ -1,4 +1,3 @@
-#include "../misc/addresses.h"
 #include "lcd.h"
 
 void _print_char(unsigned char c)

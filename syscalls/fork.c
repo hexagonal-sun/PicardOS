@@ -1,8 +1,10 @@
-#include "../misc/addresses.h"
-#include "../scheduling/pcb.h"
+#include <pcb.h>
 #include "../scheduling/util.h"
 
 void exit();
+
+static unsigned int NEXT_FREE_STACK = 0x00027C00;
+static unsigned int PCB_BASE = 0x0007FFF0;
 
 void _fork(unsigned int start_address,
            unsigned int stack_size)

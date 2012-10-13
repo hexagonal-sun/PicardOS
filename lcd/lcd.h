@@ -5,6 +5,8 @@
 #define LCD_RW 0x4
 #define LCD_BUSY_MASK 0x80
 #define LCD_BACKLIGHT_MASK 0x20
+volatile unsigned int *PIO_A;
+volatile unsigned int *PIO_B;
 
 /* LCD commands */
 #define LCD_NEWLINE 0xC0

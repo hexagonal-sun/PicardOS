@@ -1,5 +1,7 @@
-#include "../misc/addresses.h"
 #include "lcd.h"
+
+volatile unsigned int* PIO_A = (unsigned int*)0x10000000;
+volatile unsigned int* PIO_B = (unsigned int*)0x10000004;
 
 void _lcd_busy()
 {

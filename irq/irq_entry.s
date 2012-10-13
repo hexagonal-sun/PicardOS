@@ -1,3 +1,5 @@
+#include <pcb.h>
+
 	.global __irq_entry
 	.set port_area, 0x10000000
 	.set irq_ack, 0x18
