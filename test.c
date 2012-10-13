@@ -1,5 +1,5 @@
-#include "syscalls/syscalls.h"
 #include <up.h>
+#include <syscalls.h>
 
 void delay()
 {

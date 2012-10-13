@@ -1,4 +1,4 @@
-#include "syscalls.h"
+#include <syscalls.h>
 
 void lcd_send_command(enum lcd_command command)
 {
