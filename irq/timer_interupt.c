@@ -1,4 +1,5 @@
 #include <pcb.h>
+#include <init.h>
 
 unsigned int  *TIMER_ADDRESS = (unsigned int*)0x10000008;
 unsigned int  *TIMER_CMP_REG = (unsigned int*)0x1000000C;
@@ -24,3 +25,4 @@ void _timer_setup()
   // The timer runs at 1kHz, we want to interupt every 50Hz.
   (*TIMER_CMP_REG) = ((*TIMER_CMP_REG + 20) % 256);
 }
+init_call(_timer_setup);

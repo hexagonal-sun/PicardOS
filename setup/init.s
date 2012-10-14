@@ -31,7 +31,6 @@ setup:
 
 	/* set the supervisor stack */
 	LDR sp,=0x00037C00
-	BL  _timer_setup
 
 	/* Switch to IRQ Mode */
 	MSR CPSR_c, #CPSR_IRQ
