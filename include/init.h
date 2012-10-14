@@ -9,7 +9,7 @@ extern unsigned int _initcall_end;
 
 typedef void (*initcall_fn)(void);
 
-#define init_call(fn) initcall_fn __initcal_##fn	\
+#define init_call(fn) initcall_fn __initcall_##fn	\
 	__attribute__((section(".initcall"))) = fn
 
 void init();
