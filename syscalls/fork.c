@@ -1,17 +1,15 @@
 #include <pcb.h>
+#include <mm.h>
 #include "../scheduling/util.h"
 
 void exit();
 
 static unsigned int NEXT_FREE_STACK = 0x00027C00;
-static unsigned int PCB_BASE = 0x0007FFF0;
 
 void _fork(unsigned int start_address,
            unsigned int stack_size)
 {
-  PCB_BASE -= sizeof(struct pcb);
-
-  struct pcb* new_pcb = (struct pcb*)PCB_BASE;
+  struct pcb* new_pcb = (struct pcb*)malloc(sizeof(struct pcb));
 
   // set the PC.
   new_pcb->regs[16] = start_address;
