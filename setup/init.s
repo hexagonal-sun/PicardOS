@@ -44,19 +44,11 @@ setup:
 	LDR R1, =IRQ_ENABLE
 	STR R0, [R1]
 
-	/* Switch back to sup mode for program
+	/* Switch back to sup mode for kernel
 	   initalisation */
 	MSR CPSR_c, #CPSR_SUP
 
-	/* Fork to the user program */
-	LDR R0, =proc1
-	MOV R1, #1000
-	BL  _fork
-	LDR R0, =proc2
-	MOV R1, #1000
-	BL  _fork
 	LDR R0, =main
-	MOV R1, #100
-	BL _fork
+	mov PC, R0
 
-	B  _task_switch
+	B  .	@We should never get here.
