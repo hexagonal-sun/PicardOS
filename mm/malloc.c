@@ -6,7 +6,7 @@ char *malloc_ptr;
 
 void mem_init()
 {
-	malloc_ptr = (char *)_edata;
+	malloc_ptr = (char *)&_edata;
 }
 init_call(mem_init);
 
