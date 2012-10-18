@@ -8,7 +8,7 @@ void mem_init()
 {
 	malloc_ptr = (char *)&_edata;
 }
-init_call(mem_init);
+early_initcall(mem_init);
 
 void *malloc(unsigned int sz)
 {

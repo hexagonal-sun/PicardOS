@@ -3,16 +3,22 @@
 #include <ksyscalls.h>
 #include <sched.h>
 
-void main()
+void call_initcalls(unsigned int *begin,
+		    unsigned int *end)
 {
-	/*
-	 * Call kernel init calls.
-	 */
-	initcall_fn *current_call = (initcall_fn*)&_initcall_begin;
-	while (current_call != (initcall_fn*)&_initcall_end) {
+	initcall_fn *current_call = (initcall_fn*)begin;
+	while (current_call != (initcall_fn*)end) {
 		(*current_call)();
 		current_call++;
 	}
+}
+
+void main()
+{
+	call_initcalls(&_early_initcall_begin,
+		       &_early_initcall_end);
+	call_initcalls(&_initcall_begin,
+		       &_initcall_end);
 
 	/*
 	 * Fork user processes.
