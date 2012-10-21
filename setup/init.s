@@ -30,13 +30,13 @@ setup:
 	STR R0, [R1]
 
 	/* set the supervisor stack */
-	LDR sp,=0x00037C00
+	LDR sp, =svc_stack_end
 
 	/* Switch to IRQ Mode */
 	MSR CPSR_c, #CPSR_IRQ
 
 	/* Set the IRQ stack */
-	LDR sp,=0x00047C00
+	LDR sp, =irq_stack_end
 
 	/* Enable interupts */
 	MOV R0, #1
@@ -51,3 +51,7 @@ setup:
 	mov PC, R0
 
 	B  .	@We should never get here.
+	.section ".stack"
+svc_stack_begin:	.space	4096
+svc_stack_end:		.space 4096
+irq_stack_end:
