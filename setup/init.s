@@ -4,24 +4,29 @@
 	.set CPSR_IRQ, 0x12
 	.set IRQ_ENABLE, 0x1000001C
 	.global _start
+	.global _vec_end
 _start:
-	b setup
-	b _exit
-	b __syscall
-	b _exit
-	b _exit
-	b _exit
-	b __irq_entry
-	b _exit
-	b _exit
-	b _exit
-	b _exit
-	b _exit
-	b _exit
-	b _exit
-	b _exit
+	LDR pc, [pc, #24]
+	LDR pc, [pc, #24]
+	LDR pc, [pc, #24]
+	LDR pc, [pc, #24]
+	LDR pc, [pc, #24]
+	LDR pc, [pc, #24]
+	LDR pc, [pc, #24]
+	LDR pc, [pc, #24]
+	.word    __setup                 @ reset
+	.word    .                       @ undef
+	.word    __syscall               @ svc
+	.word    .                       @ pabort
+	.word    .                       @ dabort
+	.word    .                       @ hyp
+	.word    __irq_entry             @ irq
+	.word    .                       @ fiq
 
-setup:
+_vec_end:
+	.align 8
+
+__setup:
 	/* Initialise memory */
 	MOV R0, #0
 	LDR R1, =PCB_HEAD
