@@ -14,3 +14,4 @@ void exit(); /* svc 4 */
 /* svc 5 - reserved. */
 void print_string(const char* c); /* svc 6 */
 void lcd_send_command(enum lcd_command command); /* svc 7 */
+void putc(char c); /* svc 8 */

@@ -1,6 +1,6 @@
 .global			__syscall
 .set svc_opcode_clear,	0xFF000000
-.set max_swi,		0x07
+.set max_swi,		0x08
 
 __syscall:		PUSH {R12, LR}
 
@@ -33,6 +33,7 @@ jump_table:		.word _halt
 			.word _lcd_backlight_control
 			.word _print_string
 			.word _lcd_send_command
+			.word _putc
 
 svc_return:		POP  {R12, LR}
 			MOVS PC, LR
