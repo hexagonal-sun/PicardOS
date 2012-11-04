@@ -2,7 +2,7 @@ TOOLCHAIN=arm-linux-gnueabihf
 CC=$(TOOLCHAIN)-gcc
 AS=$(TOOLCHAIN)-as
 OBJCOPY=$(TOOLCHAIN)-objcopy
-CFLAGS=-static -nostdlib -Os -mno-thumb-interwork --std=c99 -march=armv4  -fno-builtin -g3 -msoft-float -marm -I ./include
+CFLAGS=-static -nostdlib -Os -mno-thumb-interwork --std=c99 -march=armv7-a  -fno-builtin -g3 -msoft-float -marm -I ./include
 
 all: kernel.bin
 

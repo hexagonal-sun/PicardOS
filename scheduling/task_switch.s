@@ -1,5 +1,8 @@
 	.global _task_switch
 
+_armv7_idle:
+	WFI
+
 _task_switch:
 
 	/* reset the context_swtich flag. */
@@ -10,6 +13,9 @@ _task_switch:
 	/* Load the tasks cpsr into the spsr */
 	LDR R0, =PCB_HEAD
 	LDR R0, [R0]
+
+	CMP R0, #0
+	BEQ _armv7_idle
 
 	LDR R1, [R0, #(15 * 4)]
 	MSR spsr, R1
