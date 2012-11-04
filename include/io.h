@@ -12,7 +12,7 @@
 
 void writeb(char val, iomem addr);
 void writew(unsigned int val, iomem addr);
-volatile char readb(iomem addr);
-volatile unsigned int readw(iomem addr);
+char readb(iomem addr);
+unsigned int readw(iomem addr);
 
 #endif

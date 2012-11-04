@@ -2,6 +2,7 @@
 #include <up.h>
 #include <ksyscalls.h>
 #include <sched.h>
+#include <print.h>
 
 void call_initcalls(unsigned int *begin,
 		    unsigned int *end)
@@ -17,6 +18,9 @@ void main()
 {
 	call_initcalls(&_early_initcall_begin,
 		       &_early_initcall_end);
+
+	print_str("PicardOS v0.1 booting...\n");
+
 	call_initcalls(&_initcall_begin,
 		       &_initcall_end);
 
