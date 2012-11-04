@@ -8,5 +8,5 @@ void _putc(char c)
 
 void putc(char c)
 {
-	__asm__ volatile("svc 8");
+	__asm__ volatile("svc 3");
 }

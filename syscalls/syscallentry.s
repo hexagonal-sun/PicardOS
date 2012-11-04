@@ -1,6 +1,6 @@
 .global			__syscall
 .set svc_opcode_clear,	0xFF000000
-.set max_swi,		0x08
+.set max_swi,		0x03
 
 __syscall:		PUSH {R12, LR}
 
@@ -16,7 +16,7 @@ __syscall:		PUSH {R12, LR}
 			ADR LR, svc_return
 
 			/* Check if this is an exit routine. */
-			CMP R12, #4
+			CMP R12, #2
 
 			/* Load the return if we are an exit call. */
 			ADREQ LR, svc_exit_return
@@ -26,13 +26,8 @@ __syscall:		PUSH {R12, LR}
 			LDR  PC, [R12, #0] /* Load into the PC. */
 
 jump_table:		.word _halt
-			.word _get_timer_val
-			.word _write_pio_a
 			.word _fork
 			.word _exit
-			.word _lcd_backlight_control
-			.word _print_string
-			.word _lcd_send_command
 			.word _putc
 
 svc_return:		POP  {R12, LR}

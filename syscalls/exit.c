@@ -13,5 +13,5 @@ void _exit()
 
 void exit()
 {
-  __asm__ volatile("svc 4");
+  __asm__ volatile("svc 2");
 }

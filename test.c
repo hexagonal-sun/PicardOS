@@ -9,23 +9,6 @@ void delay()
     }
 }
 
-int proc1()
-{
-  while(1)
-    {
-      write_pio_a(24);
-    }
-}
-user_process(proc1,1000);
-
-void proc2()
-{
-  while(1)
-    {
-      write_pio_a(10);
-    }
-}
-
 
 int factorial(int num)
 {
@@ -34,25 +17,14 @@ int factorial(int num)
 	return (num * factorial(num - 1));
 }
 
-void lcd_test()
+int serial_hello()
 {
-  while(1)
-    {
-      lcd_send_command(BACKLIGHT_ON);
-      delay();
-      lcd_send_command(BACKLIGHT_OFF);
-      delay();
-    }
+	char *c = "Hello from user space!\n";
+	char cc = *c;
+	while (cc != '\0') {
+		putc(cc); 
+		cc = *c++;
+	}
+	return 0;
 }
-
-void lcd_print_test()
-{
-  char* c = "Hello, World!\nAlso, Hi!";
-  lcd_send_command(BACKLIGHT_ON);
-  print_string(c);
-  volatile int i = 0;
-  while(1)
-    {
-      i++;
-    }
-}
+user_process(serial_hello,1000);

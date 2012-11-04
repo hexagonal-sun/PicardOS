@@ -32,5 +32,5 @@ void _fork(unsigned int start_address,
 void fork(unsigned int start_address,
           unsigned int stack_size)
 {
-	__asm__ volatile("svc 3");
+	__asm__ volatile("svc 1");
 }
