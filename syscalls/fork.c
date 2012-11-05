@@ -4,8 +4,6 @@
 
 void exit();
 
-static unsigned int NEXT_FREE_STACK = 0x00027C00;
-
 void _fork(unsigned int start_address,
            unsigned int stack_size)
 {
@@ -21,8 +19,7 @@ void _fork(unsigned int start_address,
   new_pcb->regs[14] = (unsigned int)&exit;
 
   // set the stack.
-  new_pcb->regs[13] = NEXT_FREE_STACK;
-  NEXT_FREE_STACK -= stack_size;
+  new_pcb->regs[13] = (unsigned int)malloc(stack_size);
 
   // Add the new task to the run-queue.
   add_to_queue(new_pcb, &PCB_HEAD);
