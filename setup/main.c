@@ -6,9 +6,9 @@
 
 void copy_vectors()
 {
-	extern unsigned int _start;
+	extern unsigned int _vec_start;
 	extern unsigned int _vec_end;
-	volatile unsigned int *current_vec = (unsigned int *)&_start;
+	volatile unsigned int *current_vec = (unsigned int *)&_vec_start;
 	volatile unsigned int *end_vec = (unsigned int *)&_vec_end;
 	volatile unsigned int *dest_vec = (unsigned int *)0x0;
 	while (current_vec != end_vec) {

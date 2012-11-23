@@ -3,9 +3,11 @@
 	.set CPSR_SUP, 0x13
 	.set CPSR_IRQ, 0x12
 	.set IRQ_ENABLE, 0x1000001C
-	.global _start
+	.global _vec_start
 	.global _vec_end
 _start:
+	mov r12, pc
+_vec_start:
 	LDR pc, [pc, #24]
 	LDR pc, [pc, #24]
 	LDR pc, [pc, #24]
