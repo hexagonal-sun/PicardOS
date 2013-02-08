@@ -10,7 +10,7 @@ objects=setup/init.o setup/main.o syscalls/syscallentry.o		\
 syscalls/halt.o irq/irq_entry.o irq/timer_interupt.o syscalls/fork.o	\
 scheduling/task_switch.o scheduling/sched_policy.o syscalls/exit.o	\
 scheduling/util.o test.o mm/malloc.o kernel/io.o kernel/print.o		\
-drivers/serial/pl011.o syscalls/putc.o setup/mem_init.o
+drivers/serial/pl011.o syscalls/putc.o setup/mem_init.o mm/pgalloc.o
 
 %.o: %.s
 	@echo "  AS	$@"
