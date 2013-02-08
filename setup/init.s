@@ -7,13 +7,13 @@
 	.global _vec_start
 	.global _vec_end
 _start:
-	mov	r12, pc		@ Save the start address
+	mov	r10, pc		@ Save the start address
 	ldr	r0,=PAGE_MASK
-	bic	r12, r12, r0		@ Page align the star addr ptr
+	bic	r10, r10, r0		@ Page align the star addr ptr
 
 	adr	sp, __boot_stack	@ Set the boot stack
 
-	mov	r0, r12
+	mov	r0, r10
 	ldr	r1, =0xc0000000	@ Load the linked kernel address
 	bl	setup_pg_tables
 
@@ -38,7 +38,7 @@ _start:
 	mov	r0, #0
 	mcr	p15, 0, r0, c7, c5, 4   @ ISB
 
-	mov	r0, r12		@ Load the kernel PA
+	mov	r0, r10		@ Load the kernel PA
 	ldr	r1, =0xc0000000	@ Set the kernel linked VA
 	mov	r2, r6			@ Load the kernel pdp
 
