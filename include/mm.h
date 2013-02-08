@@ -7,6 +7,7 @@
 typedef unsigned long vm_offset_t;
 typedef unsigned long phys_addr_t;
 
+vm_offset_t data_start;
 phys_addr_t mem_start;
 
 struct vm_mapping

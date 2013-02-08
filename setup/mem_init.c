@@ -11,7 +11,7 @@ struct pmap kernel_pmap;
  */
 struct vm_mapping kernel_code;
 struct vm_mapping kernel_stack;
-
+struct vm_mapping kernel_data;
 
 /**
  * This function setups up the kernel page tables to map to the link
@@ -89,6 +89,16 @@ vm_offset_t post_mmu_setup(phys_addr_t mem_start,
 	pdp[lin2pgidx(KERNEL_STACK)] = section;
 
 	/*
+	 * Map a page for the kernel data.
+	 */
+	section = 2;
+	section |= inclin(inclin(mem_start));
+	section |= ARM_SC_BUF | ARM_SC_CACHE;
+	section |= ARM_SC_AP_0 | ARM_SC_AP_1;
+	pdp[lin2pgidx(inclin(kern_va))] = section;
+	data_start = inclin(kern_va);
+
+	/*
 	 * Setup the kernel mapping structs.
 	 */
 	kernel_code.page = &pdp[lin2pgidx(kern_va)];
@@ -101,7 +111,12 @@ vm_offset_t post_mmu_setup(phys_addr_t mem_start,
 	kernel_stack.pa = inclin(mem_start);
 	kernel_stack.va = inclin(kern_va);
 	kernel_stack.name = "Kernel stack";
-	kernel_stack.next = 0;
+	kernel_stack.next = &kernel_data;
+
+	kernel_data.page = &pdp[lin2pgidx(inclin(kern_va))];
+	kernel_data.va = inclin(kern_va);
+	kernel_data.name = "Kernel data";
+	kernel_data.next = 0;
 
 	kernel_pmap.base = pdp;
 	kernel_pmap.next = 0;
