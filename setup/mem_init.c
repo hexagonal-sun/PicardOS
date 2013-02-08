@@ -102,13 +102,11 @@ vm_offset_t post_mmu_setup(phys_addr_t mem_start,
 	 * Setup the kernel mapping structs.
 	 */
 	kernel_code.page = &pdp[lin2pgidx(kern_va)];
-	kernel_code.pa = mem_start;
 	kernel_code.va = kern_va;
 	kernel_code.name = "Kernel code";
 	kernel_code.next = &kernel_stack;
 
 	kernel_stack.page = &pdp[lin2pgidx(KERNEL_STACK)];
-	kernel_stack.pa = inclin(mem_start);
 	kernel_stack.va = inclin(kern_va);
 	kernel_stack.name = "Kernel stack";
 	kernel_stack.next = &kernel_data;

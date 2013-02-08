@@ -10,10 +10,20 @@ typedef unsigned long phys_addr_t;
 vm_offset_t data_start;
 phys_addr_t mem_start;
 
+struct vm_mapping;
+
+struct pmem
+{
+	phys_addr_t addr;
+	struct pmem *next;
+	struct pmem *prev;
+	struct vm_mapping *vmap;
+};
+
 struct vm_mapping
 {
 	pt_entry_t *page;
-	phys_addr_t pa;
+	struct pmem *phys;
 	vm_offset_t va;
 	char *name;
 	struct vm_mapping *next;
