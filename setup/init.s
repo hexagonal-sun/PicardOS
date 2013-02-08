@@ -50,8 +50,9 @@ _start:
 1:
 	mov	sp, r0
 
-	LDR R0, =main			@ Jump to C code.
-	mov PC, R0
+	mov	r0, r10
+	LDR R1, =main			@ Jump to C code.
+	mov PC, R1
 
 	b	.			@ We should never get here.
 	.ltorg

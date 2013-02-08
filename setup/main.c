@@ -1,3 +1,4 @@
+#include <mm.h>
 #include <init.h>
 #include <up.h>
 #include <ksyscalls.h>
@@ -29,8 +30,11 @@ void call_initcalls(unsigned int *begin,
 	}
 }
 
-void main()
+void main(phys_addr_t m_start)
 {
+	// Record the address of the start of physical RAM.
+	mem_start = m_start;
+
 	call_initcalls(&_system_initcall_begin,
 		       &_system_initcall_end);
 
