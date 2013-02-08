@@ -7,11 +7,14 @@ SECTIONS
     .text : { *(.text*) }
     .data : { *(.data) }
     .bss : { *(.bss) }
-    _early_initcall_begin = .;
+    _system_initcall_begin = .;
     .initcall0 : { *(.initcall0) }
+    _system_initcall_end = .;
+    _early_initcall_begin = .;
+    .initcall1 : { *(.initcall1) }
     _early_initcall_end = .;
     _initcall_begin = .;
-    .initcall1 : { *(.initcall1) }
+    .initcall2 : { *(.initcall2) }
     _initcall_end = .;
     _up_begin = .;
     .user_processes : { *(.user_processes) }

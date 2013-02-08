@@ -31,6 +31,9 @@ void call_initcalls(unsigned int *begin,
 
 void main()
 {
+	call_initcalls(&_system_initcall_begin,
+		       &_system_initcall_end);
+
 	call_initcalls(&_early_initcall_begin,
 		       &_early_initcall_end);
 
